@@ -1,8 +1,47 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+	padding: 0;
+	margin: 0;
 }
 
+
+body {
+	font-size: 16px;
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+
 a {
-  color: #00B7FF;
+	color: #00B7FF;
+}
+
+
+#page-wrap {
+	color: white;
+	margin: 2% auto;
+}
+
+#page-wrap > .main {
+	padding: 1%;
+	border: 1px solid #999;
+	margin-bottom: 1px;
+	color: black;
+}
+
+
+section > div{
+	padding: 20px;
+}
+
+
+header,
+nav,
+section,
+footer {
+	background-color: #eee;
+	text-align: center;
+}
+
+
+nav span {
+	margin: 0 10px 0 0;
 }
