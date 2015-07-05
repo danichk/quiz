@@ -6,8 +6,12 @@ var authorController = require('../controllers/author_controller');
 
 /* Página de entrada (home page) */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Quiz' });
+	res.render('index', { title: 'Quiz' });
 });
+
+
+// Autoload de comandos con :quizId
+router.param('quizId', quizController.load);
 
 // Definición de rutas de /quizes
 router.get('/quizes', quizController.index);
