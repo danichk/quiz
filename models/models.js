@@ -40,7 +40,8 @@ sequelize.sync().then(function () {
 			Quiz.bulkCreate(
 				[
 					{pregunta: 'Capital de Italia', respuesta: 'Roma'},
-					{pregunta: 'Capital de Portugal', respuesta: 'Lisboa'}
+					{pregunta: 'Capital de Portugal', respuesta: 'Lisboa'},
+					{pregunta: 'Criatura fantástica semejante a un lobo, pero de mayor tamaño, fiereza e inteligencia', respuesta: 'Huargo'}
 				]
 			).then(function () {
 				console.log('Base de datos inicializada');
