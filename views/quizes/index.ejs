@@ -8,6 +8,9 @@
 		<li>
 			<a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
 			<a href="quizes/<%= quizes[i].id %>/edit"><button>Editar</button></a>
+			<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete" class="delete-question__form">
+				<button type="submit" onclick="return confirm('Borrar: <%= quizes[i].pregunta %>');">Borrar</button>
+			</form>
 		</li>
 	<% } %>
 </ul>

@@ -50,3 +50,7 @@ nav span {
 	font-size: smaller;
 	color: #f61;
 }
+
+.delete-question__form {
+	display: inline-block;
+}
