@@ -8,12 +8,16 @@
 		<li>
 			<span>[<%= quizes[i].tema %>]</span>
 			<a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
-			<a href="quizes/<%= quizes[i].id %>/edit"><button>Editar</button></a>
-			<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete" class="delete-question__form">
-				<button type="submit" onclick="return confirm('Borrar: <%= quizes[i].pregunta %>');">Borrar</button>
-			</form>
+			<% if (session.user) { %>
+				<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete" class="delete-question__form">
+					<a href="quizes/<%= quizes[i].id %>/edit"><input type="button" value="Editar"></a>
+					<input type="submit" onclick="return confirm('Borrar: <%= quizes[i].pregunta %>');" value="Borrar">
+				</form>
+			<% } %>
 		</li>
 	<% } %>
 </ul>
 
-<a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+<% if (session.user) { %>
+	<a href="/quizes/new"><button type="button">Crear pregunta</button></a>
+<% } %>
