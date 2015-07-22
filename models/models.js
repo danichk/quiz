@@ -36,7 +36,7 @@ var comment_path = path.join(__dirname, 'comment');
 var Comment = sequelize.import(comment_path);
 
 Comment.belongsTo(Quiz);
-Quiz.hasMany(Comment);
+Quiz.hasMany(Comment, {'constraints': true, 'onUpdate': 'cascade', 'onDelete': 'cascade', 'hooks': true}); // Si borramos pregunta, borrar en cascada sus comentarios asociados
 
 exports.Quiz = Quiz; // exportar definición de tabla Quiz
 exports.Comment = Comment; // exportar definición de tabla Comment
