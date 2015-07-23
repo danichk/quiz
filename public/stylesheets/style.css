@@ -55,6 +55,6 @@ nav span {
 	color: #f61;
 }
 
-.delete-question__form {
+.inline-form {
 	display: inline-block;
 }

@@ -9,7 +9,7 @@
 			<span>[<%= quizes[i].tema %>]</span>
 			<a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
 			<% if (session.user) { %>
-				<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete" class="delete-question__form">
+				<form method="post" action="quizes/<%= quizes[i].id %>?_method=delete" class="inline-form">
 					<a href="quizes/<%= quizes[i].id %>/edit"><input type="button" value="Editar"></a>
 					<input type="submit" onclick="return confirm('Borrar: <%= quizes[i].pregunta %>');" value="Borrar">
 				</form>
