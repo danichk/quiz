@@ -23,12 +23,23 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser('Quiz 2015'));
-app.use(session());
+app.use(session({
+    secret: 'quiz-danichk',
+    resave: false,
+    saveUninitialized: true,
+    rolling: true,
+    cookie:{maxAge:120000}
+}));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Helpers dinámicos
 app.use(function (req, res, next) {
+    // si no existe lo inicializa
+     if (!req.session.redir) {
+        req.session.redir = '/';
+     }
+
 	// Guardar path en session.redir para después del login
 	if (!req.path.match(/\/login|\/logout/)) {
 		req.session.redir = req.path;
