@@ -1,0 +1,20 @@
+
+Estadísticas:
+<table>
+	<tr>
+		<th>Preguntas</th>
+		<td><%= statistics.numQuiz %></td>
+	</tr>
+		<th>Comentarios</th>
+		<td><%= statistics.countPublished %></td>
+	</tr>
+		<th>Preguntas con comentarios</th>
+		<td><%= statistics.quizesCommented %></td>
+	</tr>
+		<th>Preguntas sin comentarios</th>
+		<td><%= statistics.quizesUnCommented %></td>
+	</tr>
+		<th>Media de comentarios por pregunta</th>
+		<td><%=statistics.averageComments%></td>
+	</tr>
+</table>
