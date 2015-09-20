@@ -41,7 +41,7 @@ app.use(function (req, res, next) {
      }
 
 	// Guardar path en session.redir para después del login
-	if (!req.path.match(/\/login|\/logout/)) {
+	if (!req.path.match(/\/login|\/logout|\/user/)) {
 		req.session.redir = req.path;
 	}
 

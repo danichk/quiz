@@ -1,6 +1,22 @@
-var users = {
-	admin: {id: 1, username: "admin", password: "1234"},
-	user: {id: 2, username: "user", password: "5678"}
+var models = require('../models/models.js');
+
+// Autoload : userId
+exports.load = function (req, res, next, userId) {
+	models.User.find({
+		where: {
+			id: Number(userId)
+		}
+	}).then(function (user) {
+		if (user) {
+			req.user = user;
+			next();
+		}
+		else {
+			next(new Error('No existe userId=' + userId));
+		}
+	}).catch(function (error) {
+		next(error);
+	});
 };
 
 // Comprueba si el usuario está registrado en users
@@ -25,4 +41,82 @@ exports.autenticar = function (login, password, callback) {
 	}).catch(function (error) {
 		callback(error);
 	});	
+};
+
+// GET /user/:id/edit
+exports.edit = function (req, res) {
+	// req.user: instancia de user cargada con autoload
+	res.render('user/edit', {user: req.user, errors: []});
+};
+
+// GET /user
+exports.new = function (req, res) {
+	// crea objeto user
+	var user = models.User.build(
+		{
+			username: "", password: ""
+		}
+	);
+	res.render('user/new', {user: user, errors: []});
+};
+
+// POST /user
+exports.create = function (req, res) {
+	var user = models.User.build(req.body.user);
+
+	user
+	.validate()
+	.then(
+		function (err) {
+			if (err) {
+				res.render('user/new', {user: user, errors: err.errors});
+			}
+			else {
+				user
+				// save: guarda en DB campos username y password de user
+				.save({fields: ["username", "password"]})
+				.then(function () {
+					// crea la sesión con el usuario ya autenticado y redirige a /
+					req.session.user = {id:user.id, username:user.username};
+				});
+			}
+		}
+	).catch(function (error) {
+		next(error);
+	});
+};
+
+// PUT /user/:id
+exports.update = function (req, res, next) {
+	req.user.username = req.body.user.username;
+	req.user.password = req.body.user.password;
+
+	req.user
+	.validate()
+	.then(function (err) {
+		if (err) {
+			res.render('user/' + req.user.id, {user: req.user, errors: err.errors});
+		}
+		else {
+			req.user
+			// save: guarda campo username y password en DB
+			.save({fields: ["username", "password"]})
+			.then(function () {
+				res.redirect('/');
+			});
+		}
+	}).catch(function (error) {
+		next(error);
+	});
+};
+
+// DELETE /user/:id
+exports.destroy = function (req, res) {
+	req.user.destroy().then(function () {
+		// borra la sesión y redirige a /
+		delete req.session.user;
+		res.redirect('/');
+	}).catch(function (error) {
+		next(error);
+	});
 };

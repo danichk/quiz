@@ -1,0 +1,9 @@
+<h2>Editar cuenta</h2>
+
+<form method="post" action="/user/<%= user.id %>?_method=put">
+	<%= include _form.ejs %>
+</form>
+
+<form method="post" action="user/<%= user.id %>?_method=delete">
+	<input type="submit" onClick="return confirm('Borrar cuenta: <%= user.username %>');" value="Eliminar">
+</form>

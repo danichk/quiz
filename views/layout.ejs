@@ -11,16 +11,25 @@
 <body>
 	<div id="page-wrap">
 		<header class="main" id="h1">
-            <% if (!session.user) { %>
-                    <form method="get" action="/login">
-                        <span class="right"><input type="submit" value="Login"></span>
-                    </form>
-            <% }
-                else { %>
-                    <form method="post" action="/logout?_method=delete">
-                        <span class="right"><%= session.user.username %><input type="submit" value="Logout"></span>
-                    </form>
-            <% } %>
+            <div class="header__options">
+                <% if (!session.user) { %>
+                        <form method="get" action="/user" class="inline-form">
+                            <span class="right"><input type="submit" value="Sign up"></span>
+                        </form>
+                        <form method="get" action="/login" class="inline-form">
+                            <span class="right"><input type="submit" value="Login"></span>
+                        </form>
+                <% }
+                    else { %>
+                        <span><%= session.user.username %></span>
+                        <form method="get" action="/user/<%= session.user.id %>/edit" class="inline-form">
+                            <input type="submit" value="Settings"></span>
+                        </form>
+                        <form method="post" action="/logout?_method=delete" class="inline-form">
+                            <input type="submit" value="Logout"></span>
+                        </form>
+                <% } %>
+            </div>
             
     		<h2>Quiz<span>: el juego de las preguntas</span></h2>
     	</header>

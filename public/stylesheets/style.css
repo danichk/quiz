@@ -50,6 +50,10 @@ nav span {
 	margin: 0 10px 0 0;
 }
 
+.header__options {
+	text-align: right;
+}
+
 #ErrorMsgs {
 	font-size: smaller;
 	color: #f61;
